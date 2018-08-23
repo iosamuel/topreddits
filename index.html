@@ -22,7 +22,7 @@
                             fluid
                         >
                             <v-layout row wrap>
-                                <v-flex xs12 mb-3 v-for="(item, index) in posts" @click="goToPost(index)">
+                                <v-flex xs12 mb-3 v-for="(item, index) in posts" @click.prevent="goToPost(index)">
                                     <v-card color="blue-grey darken-2" class="white--text" hover>
                                         <v-card-actions class="pa-3">
                                             <span>{{ item.data.author }}<br/><span v-html="hoursPassed(item.data.created_utc)"></span> hours ago</span>
@@ -38,13 +38,13 @@
                                                     contain
                                                 ></v-card-media>
                                             </v-flex>
-                                            <v-flex :class="{ 'xs8': hasThumbnail(item.data), 'xs12': !hasThumbnail(item.data)  }">
-                                            <v-card-title>
-                                                <div>
-                                                    <div class="headline">Post title</div>
-                                                    <div class="mh-150 overflow-h">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                                                </div>
-                                            </v-card-title>
+                                            <v-flex :class="{ 'xs8': hasThumbnail(item.data), 'xs12': !hasThumbnail(item.data) }">
+                                                <v-card-title>
+                                                    <div>
+                                                        <div class="headline">{{ item.data.title }}</div>
+                                                        <div class="mh-150 overflow-h" v-html="getPostHtml(item.data.selftext_html)"></div>
+                                                    </div>
+                                                </v-card-title>
                                             </v-flex>
                                         </v-layout>
                                         <v-divider light></v-divider>
@@ -89,6 +89,7 @@
         </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
     <script src="app.js"></script>

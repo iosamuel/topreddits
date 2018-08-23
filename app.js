@@ -22,6 +22,9 @@ new Vue({
             let diff = (new Date().getTime() / 1000) - new Date(created).getTime();
             diff /= (60 * 60);
             return Math.abs(Math.floor(diff));
+        },
+        getPostHtml(html) {
+            return html ? _.unescape(html) : null;
         }
     }
 })
