@@ -1,0 +1,2 @@
+## Step by step on decisions made for this test
+Since this is a really simple single-page, I decided to use a simplified version of vue, vuetify (for material design layout) and jquery (mostly for the ajax request)
