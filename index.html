@@ -72,13 +72,17 @@
                                         class="source-media"
                                         contain
                                     ></v-card-media>
-                            
                                     <v-card-title primary-title>
                                         <div>
                                             <h3 class="headline mb-0">{{ currentPost.data.title }}</h3>
                                             <div v-html="getPostHtml(currentPost.data.selftext_html)"></div>
                                         </div>
                                     </v-card-title>
+                                    <v-divider light></v-divider>
+                                    <v-card-actions class="pa-3">
+                                        <span>Posted by u/{{ currentPost.data.author }} <span v-html="hoursPassed(currentPost.data.created_utc)"></span> hours ago</span>
+                                        <v-spacer></v-spacer>
+                                        <span>{{ currentPost.data.num_comments }} comments</span>
                                     </v-card-actions>
                                 </v-card>
                             </v-flex>
