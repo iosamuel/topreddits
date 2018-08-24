@@ -27,7 +27,7 @@
                                         <v-card-actions class="pa-3">
                                             <span>{{ item.data.author }}<br/><span v-html="hoursPassed(item.data.created_utc)"></span> hours ago</span>
                                             <v-spacer></v-spacer>
-                                            <v-btn fab small color="warning" @click.prevent.stop="dismissPost()"><v-icon flat dark>archive</v-icon></v-btn>
+                                            <v-btn fab small color="warning" @click.prevent.stop="dismissPost(index)"><v-icon flat dark>archive</v-icon></v-btn>
                                         </v-card-actions>
                                         <v-divider light></v-divider>
                                         <v-layout row>
@@ -62,18 +62,27 @@
                 </v-toolbar>
                 <v-content>
                     <v-container fluid fill-height>
-                    <v-layout
-                        justify-center
-                        align-center
-                    >
-                        <v-flex text-xs-center>
-                        <v-tooltip left>
-                            <v-icon large>code</v-icon>
-                            </v-btn>
-                            <span>Source</span>
-                        </v-tooltip>
-                        </v-flex>
-                    </v-layout>
+                        <v-layout>
+                            <v-flex xs12>
+                                <v-card v-if="currentPost.data">
+                                    <v-card-media
+                                        v-if="hasThumbnail(currentPost.data)"
+                                        :src="getMediaSource(currentPost.data).url"
+                                        :height="getMediaSource(currentPost.data).height"
+                                        class="source-media"
+                                        contain
+                                    ></v-card-media>
+                            
+                                    <v-card-title primary-title>
+                                        <div>
+                                            <h3 class="headline mb-0">{{ currentPost.data.title }}</h3>
+                                            <div v-html="getPostHtml(currentPost.data.selftext_html)"></div>
+                                        </div>
+                                    </v-card-title>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-flex>
+                        </v-layout>
                     </v-container>
                 </v-content>
                 <v-footer app fixed>

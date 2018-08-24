@@ -5,3 +5,7 @@
 .overflow-h {
     overflow: hidden;
 }
+
+.source-media {
+    max-height: 720px;
+}

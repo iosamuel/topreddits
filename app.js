@@ -1,19 +1,21 @@
 new Vue({ 
     el: "#app",
     data: {
-        posts: []
+        posts: [],
+        currentPost: {}
     },
     created() {
         $.get("https://www.reddit.com/r/all/top.json?limit=50", (res) => {
             this.posts = res.data.children;
+            this.currentPost = this.posts[0];
         });
     },
     methods: {
         goToPost(index) {
-            console.log("CLICKED POST", index)
+            this.currentPost = this.posts[index];
         },
-        dismissPost() {
-            console.log("DISMISS POST")
+        dismissPost(index) {
+            this.posts.splice(index, 1);
         },
         hasThumbnail(itemData) {
             return itemData.thumbnail.includes("http://") || itemData.thumbnail.includes("https://");
@@ -25,6 +27,10 @@ new Vue({
         },
         getPostHtml(html) {
             return html ? _.unescape(html) : null;
+        },
+        getMediaSource(itemData) {
+            const image = itemData.preview.images[0];
+            return (image.variants.gif && image.variants.gif.source) || image.source;
         }
     }
 })
