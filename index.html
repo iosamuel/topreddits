@@ -40,9 +40,9 @@
                                             </v-flex>
                                             <v-flex :class="{ 'xs8': hasThumbnail(item.data), 'xs12': !hasThumbnail(item.data) }">
                                                 <v-card-title>
-                                                    <div>
+                                                    <div class="mh-165 overflow-h">
                                                         <div class="headline">{{ item.data.title }}</div>
-                                                        <div class="mh-150 overflow-h" v-html="getPostHtml(item.data.selftext_html)"></div>
+                                                        <div v-html="getPostHtml(item.data.selftext_html)"></div>
                                                     </div>
                                                 </v-card-title>
                                             </v-flex>
